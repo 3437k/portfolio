@@ -1,7 +1,32 @@
-import { defineConfig } from "vitepress";
+// vitejs.dev/config/
+// https://vitepress.dev/ko/guide/cms#general-workflow
+import { defineConfig, loadEnv } from "vitepress";
+
+// Google Analytics 사용
+// https://vitepress.dev/ko/reference/site-config#example-using-google-analytics
+const env = loadEnv("", process.cwd());
+
+const TAG_ID = env.VITE_GA_ID || "";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  head: [
+    [
+      "script",
+      {
+        async: "",
+        src: `https://www.googletagmanager.com/gtag/js?id=${TAG_ID}`,
+      },
+    ],
+    [
+      "script",
+      {},
+      `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${TAG_ID}');`,
+    ],
+  ],
   title: "포트폴리오 - 권혁진",
   description: "권혁진 포트폴리오 사이트",
   themeConfig: {
