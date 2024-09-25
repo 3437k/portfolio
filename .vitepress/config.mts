@@ -11,6 +11,7 @@ const TAG_ID = env.VITE_GA_ID || "";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   head: [
+    ["link", { rel: "icon", href: "/favicon.ico" }],
     [
       "script",
       {
